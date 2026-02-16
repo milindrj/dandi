@@ -9,9 +9,15 @@ const BASE_NAV_ITEMS = [
 
 const DEFAULT_HREF = "#";
 
+export const PENDING_API_KEY_STORAGE = "dandi-pending-api-key";
+
+const CUSTOM_HREFS: Partial<Record<(typeof BASE_NAV_ITEMS)[number]["label"], string>> = {
+  "API Playground": "/playground",
+};
+
 export function getNavItems(overviewHref: string, activeHref: string) {
   return BASE_NAV_ITEMS.map((item, i) => {
-    const href = i === 0 ? overviewHref : DEFAULT_HREF;
+    const href = CUSTOM_HREFS[item.label] ?? (i === 0 ? overviewHref : DEFAULT_HREF);
     return {
       ...item,
       href,
